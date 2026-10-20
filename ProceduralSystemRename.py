@@ -3,6 +3,13 @@ import json
 import re
 import sys
 
+"""
+Create human-friendly system names from raw ED system names (like Wregoe CJ-X c28-22 or HIP 99188) 
+Command line usage: 
+python ProceduralSystemRename.py "HIP 99188"
+"""
+
+
 CODE_RE = re.compile(r"^[A-Z]{2}-[A-Z]$", re.IGNORECASE)
 
 ROOTS = [
