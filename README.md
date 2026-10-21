@@ -4,7 +4,7 @@ Command line usage:
 
 python ProceduralSystemRename.py "HIP 99188"
 
-Resulting pairs of [<raw_name>, <humanised_name>] are output to pair_database.lst.
+This prints the humanised name, and resulting pairs of [<raw_name>, <humanised_name>] are output to pair_database.lst.
 This is queried first to find a pre-existing match.
 Since either a humanised or raw name can be matched, pair_database.lst permits finding the original raw name for a previously humanised name.
 
