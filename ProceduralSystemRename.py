@@ -3,13 +3,6 @@ import json
 import re
 import sys
 
-"""
-Create human-friendly system names from raw ED system names (like Wregoe CJ-X c28-22 or HIP 99188) 
-Command line usage: 
-python ProceduralSystemRename.py "HIP 99188"
-"""
-
-
 CODE_RE = re.compile(r"^[A-Z]{2}-[A-Z]$", re.IGNORECASE)
 
 ROOTS = [
@@ -252,7 +245,52 @@ def name_from_code(code):
         % len(ENDINGS)
     ]
 
-    return root + middle + ending
+    separator_hash = hashlib.sha256(family_hash + instance_hash).digest()
+    separators = ["", ""]
+    consonants = "bcdfghjklmnpqrstvwxz"
+
+    while True:
+        name = root + separators[0] + middle + separators[1] + ending
+        boundaries = [
+            len(root),
+            len(root) + len(separators[0]) + len(middle),
+        ]
+        run_start = None
+        separator_index = None
+
+        for index, character in enumerate(name):
+            is_y_vowel = character.lower() == "y" and (
+                index == 0
+                or index == len(name) - 1
+                or (index > 0 and name[index - 1].lower() == "y")
+                or (index + 1 < len(name) and name[index + 1].lower() == "y")
+            )
+            is_vowel = character.lower() in "aeiou" or is_y_vowel
+
+            if is_vowel:
+                if run_start is None:
+                    run_start = index
+                if index - run_start + 1 >= 5:
+                    available = [
+                        boundary_index
+                        for boundary_index, boundary in enumerate(boundaries)
+                        if not separators[boundary_index]
+                        and run_start < boundary < index + 1
+                    ]
+                    if available:
+                        separator_index = available[
+                            separator_hash[2] % len(available)
+                        ]
+                        break
+            else:
+                run_start = None
+
+        if separator_index is None:
+            return name
+
+        separators[separator_index] = consonants[
+            separator_hash[4 + separator_index] % len(consonants)
+        ]
 
 
 def humanise_system(system_name):
@@ -316,11 +354,12 @@ if __name__ == "__main__":
 
     sysname = sys.argv[1]
 
-    verbose = True
+    verbose = False #True
 
     # see if we already have the system name (raw or humanised) in the database,
     # if not then assume a raw name has been given and humanise it
-    paired_name = get_other_name(sysname)
+    _, code = split_system_name(sysname)
+    paired_name = get_other_name(sysname) if not code else None
     if paired_name is not None:
         if verbose: print("alternate name retrieved from database:")
         print(paired_name)
