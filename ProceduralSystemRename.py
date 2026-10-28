@@ -122,45 +122,45 @@ ENDINGS += [
 
 
 
-NUM_SYL1 = [
-    "al", "bel", "cal", "del", "el", "fal",
-    "gal", "hal", "kal", "mor", "nor", "sel",
-    "tel", "val", "zar"
-]
+# NUM_SYL1 = [
+#     "al", "bel", "cal", "del", "el", "fal",
+#     "gal", "hal", "kal", "mor", "nor", "sel",
+#     "tel", "val", "zar"
+# ]
 
-NUM_SYL2 = [
-    "", "", "", "",
+# NUM_SYL2 = [
+#     "", "", "", "",
 
-    # Single vowels
-    "a", "e", "i", "o", "u", "y",
+#     # Single vowels
+#     "a", "e", "i", "o", "u", "y",
 
-    # Traditional pairs
-    "ae", "ai", "ao",
-    "ea", "ei", "eo",
-    "ia", "ie", "io",
-    "oa", "oe", "oi",
-    "ou",
-    "ua", "ue", "ui", "uo",
+#     # Traditional pairs
+#     "ae", "ai", "ao",
+#     "ea", "ei", "eo",
+#     "ia", "ie", "io",
+#     "oa", "oe", "oi",
+#     "ou",
+#     "ua", "ue", "ui", "uo",
 
-    # Y combinations
-    "ay", "ey", "iy", "oy", "uy",
-    "ya", "ye", "yi", "yo", "yu",
+#     # Y combinations
+#     "ay", "ey", "iy", "oy", "uy",
+#     "ya", "ye", "yi", "yo", "yu",
 
-    # More Elite-sounding
-    "yae", "yea", "yia",
-    "aey", "eya", "iya",
-    "ayo", "eyo", "iyo",
+#     # More Elite-sounding
+#     "yae", "yea", "yia",
+#     "aey", "eya", "iya",
+#     "ayo", "eyo", "iyo",
 
-    # Exotic combinations
-    "au", "eu", "iu",
-    "oae", "eou", "uae"
-]
+#     # Exotic combinations
+#     "au", "eu", "iu",
+#     "oae", "eou", "uae"
+# ]
 
-NUM_SYL3 = [
-    "ra", "ron", "ria", "nus",
-    "dor", "len", "mir", "th",
-    "var", "thea", "ion"
-]
+# NUM_SYL3 = [
+#     "ra", "ron", "ria", "nus",
+#     "dor", "len", "mir", "th",
+#     "var", "thea", "ion"
+# ]
 
 
 def procedural_number_name(number: int) -> str:
