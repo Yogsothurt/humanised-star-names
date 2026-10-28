@@ -247,7 +247,7 @@ def name_from_code(code):
 
     separator_hash = hashlib.sha256(family_hash + instance_hash).digest()
     separators = ["", ""]
-    consonants = "bcdfghjklmnpqrstvwxz"
+    consonants = "bcdfgjlmnpqrstvz"
 
     while True:
         name = root + separators[0] + middle + separators[1] + ending
